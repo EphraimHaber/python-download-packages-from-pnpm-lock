@@ -66,3 +66,5 @@ downloading 2 / 25 - 8.0000% done
 downloading 25 / 25 - 100.0000% done
 The packages are all downloaded and can be found in tgz-files-123e4567-e89b-12d3-a456-426614174000
 ```
+
+Then you can take all these deps and upload them to your package registry like nexus
