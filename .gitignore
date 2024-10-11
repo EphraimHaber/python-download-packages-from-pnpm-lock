@@ -160,5 +160,8 @@ cython_debug/
 # pasted pnpm-lock
 pnpm-lock.yaml
 
+# pasted package.json
+package.json
+
 # tgz files output folder 
 tgz-files-*

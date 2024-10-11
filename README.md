@@ -24,6 +24,16 @@ pip install pyyaml
 2. Prepare Your pnpm-lock.yaml File
    Ensure that your pnpm-lock.yaml file is in the same directory as the script.
 
+## You can also make a pnpm-lock file from package.json
+
+Just make sure the package.json file is in the same directory as the script and run:
+
+```bash
+pnpm install --lockfile-only
+```
+
+this will make a pnpm-lock file without downloading the deps to node_modules
+
 3. Run the Script
    Execute the script using Python:
 
