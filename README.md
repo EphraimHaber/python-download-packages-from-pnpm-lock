@@ -13,7 +13,7 @@ Before using the script, ensure you have the following installed:
 Install the required Python library by running:
 
 ```bash
-pip install pyyaml
+pip install PyYAML
 ```
 
 # How to Use
