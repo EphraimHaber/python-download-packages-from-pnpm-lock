@@ -89,9 +89,7 @@ def log_progress(package_name: str, total_length: int) -> None:
     with total_downloaded_lock:
         total_downloaded += 1
         percentage_done = (total_downloaded / total_length) * 100
-    print(
-        f"{package_name} downloaded ({total_downloaded} / {total_length} - {percentage_done:.4f}% done)"
-    )
+    print(f"{package_name} downloaded ({total_downloaded} / {total_length} - {percentage_done:.4f}% done)")
 
 
 def download_package(pkg_name_version: str, total_length: int) -> None:
@@ -147,9 +145,7 @@ with ThreadPoolExecutor() as executor:
             print("Download interrupted.")
             executor.shutdown(wait=False)
         else:
-            print(
-                f"The packages are all downloaded and can be found in {PACKED_TGZ_DESTINATION}"
-            )
+            print(f"The packages are all downloaded and can be found in {PACKED_TGZ_DESTINATION}")
 
     except KeyboardInterrupt:
         shutdown_event.set()

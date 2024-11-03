@@ -24,21 +24,43 @@ pip install PyYAML
 2. Prepare Your pnpm-lock.yaml File
    Ensure that your pnpm-lock.yaml file is in the same directory as the script.
 
+3. **Clean output** to clean all the folders with the tgz files run the following command:
+
+```bash
+python download_packages.py --clean
+```
+
 ## You can also make a pnpm-lock file from package.json
 
-Just make sure the package.json file is in the same directory as the script and run:
+Just make sure the **package.json** file is in the same directory as the script and run:
+
+for pnpm
 
 ```bash
 pnpm install --lockfile-only
 ```
 
+for npm
+
+```bash
+npm install --package-lock-only
+```
+
 this will make a pnpm-lock file without downloading the deps to node_modules
 
 3. Run the Script
-   Execute the script using Python:
+   Execute the script using Python - You must provide either --npm or --pnpm unless --clean is specified:
+
+get packages from package-lock.json (npm)
 
 ```bash
-python download_packages.py
+python download_packages.py --npm
+```
+
+get packages from pnpm-lock.yaml (pnpm)
+
+```bash
+python download_packages.py --pnpm
 ```
 
 4. Script Execution Details
