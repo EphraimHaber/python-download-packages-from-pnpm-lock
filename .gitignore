@@ -162,6 +162,7 @@ pnpm-lock.yaml
 
 # pasted package.json
 package.json
+package-lock.json
 
 # tgz files output folder 
 tgz-files-*
