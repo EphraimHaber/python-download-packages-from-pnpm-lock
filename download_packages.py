@@ -1,5 +1,6 @@
 import subprocess
 import os
+import re
 import uuid
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -21,11 +22,8 @@ group = parser.add_mutually_exclusive_group()
 group.add_argument("--npm", action="store_true", help="Use npm")
 group.add_argument("--pnpm", action="store_true", help="Use pnpm")
 
-parser.add_argument(
-    "--clean",
-    action="store_true",
-    help="Delete all folders starting with 'tgz-files'",
-)
+parser.add_argument("--clean", action="store_true", help="Delete all folders starting with 'tgz-files'")
+parser.add_argument("--name", type=str, help="notate folder to help recognize the folder")
 
 args = parser.parse_args()
 
@@ -50,7 +48,8 @@ def clean_tgz_dirs():
 if args.clean:
     clean_tgz_dirs()
 
-PACKED_TGZ_DESTINATION = f"tgz-files-{str(uuid.uuid4())}"
+label = f"{args.name}-" or ""
+PACKED_TGZ_DESTINATION = f"tgz-files-{label}{str(uuid.uuid4())}"
 os.mkdir(PACKED_TGZ_DESTINATION)
 
 total_downloaded = 0
@@ -60,13 +59,9 @@ total_downloaded_lock = threading.Lock()
 def get_packages_from_npm_lock() -> list[str]:
     with open("package-lock.json", "r") as file:
         lockfile = json.loads(file.read())
-    packages = lockfile["packages"].items()
-
-    return [
-        f"{key.replace('node_modules/', '')}@{value['version']}"
-        for key, value in packages
-        if key.startswith("node_modules/")
-    ]
+    data_str = json.dumps(lockfile)
+    urls = re.findall(r"https://registry.npmjs.org[^\s\",]+", data_str)
+    return urls
 
 
 def get_packages_from_pnpm_lock() -> list[str]:
